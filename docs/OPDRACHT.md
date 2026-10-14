@@ -44,7 +44,7 @@ Vraag Copilot het plan aan te passen als iets niet klopt.
 
 ### 2. Schrijf eerst de test die faalt
 
-Vraag Copilot om de test, of schrijf hem zelf in `backend/tests/test_reservations.py`. Een bruikbare test:
+Vraag Copilot om de test, of schrijf hem zelf in een nieuw bestand `backend/tests/test_double_booking.py`. Een bruikbare test:
 
 - Maak een reservatie van 9u tot 10u voor een lokaal.
 - Probeer een tweede reservatie van 9u30 tot 10u30 voor hetzelfde lokaal.

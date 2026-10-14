@@ -76,7 +76,6 @@ Open <http://localhost:5173>, kies bovenaan een testgebruiker en reserveer een l
 In de terminal van de backend, met de virtuele omgeving actief:
 
 ```powershell
-cd backend
 pytest
 ```
 
