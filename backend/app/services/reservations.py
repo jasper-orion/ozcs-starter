@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session
 
 from app.models import AuditLog, Reservation, Room, User
 from app.schemas import ReservationCreate
-from app.services.errors import ForbiddenError, NotFoundError
+from app.services.errors import ConflictError, ForbiddenError, NotFoundError
 
 
 def list_reservations(db: Session, user: User, mine_only: bool = False) -> list[Reservation]:
@@ -25,7 +25,17 @@ def create_reservation(db: Session, user: User, data: ReservationCreate) -> Rese
     if room is None:
         raise NotFoundError("Lokaal niet gevonden.")
 
-    # OPDRACHT (docs/OPDRACHT.md): hier komt de controle op dubbele boekingen van hetzelfde lokaal.
+    # Twee reservaties van hetzelfde lokaal overlappen als elk begint voor het andere eindigt.
+    # Aansluitende tijden (tot 10u en vanaf 10u) overlappen niet.
+    overlap = db.scalar(
+        select(Reservation.id).where(
+            Reservation.room_id == room.id,
+            Reservation.start < data.end,
+            Reservation.end > data.start,
+        )
+    )
+    if overlap is not None:
+        raise ConflictError("Dit lokaal is al gereserveerd op dat moment.")
 
     reservation = Reservation(
         school_id=user.school_id,

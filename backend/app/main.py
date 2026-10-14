@@ -9,7 +9,7 @@ from fastapi.responses import JSONResponse
 from app.config import settings
 from app.models import Base, SessionLocal, engine
 from app.routes import meta, reservations, rooms
-from app.services.errors import ForbiddenError, NotFoundError
+from app.services.errors import ConflictError, ForbiddenError, NotFoundError
 from app.services.seed import seed_if_empty
 
 
@@ -40,6 +40,11 @@ def not_found_handler(_request: Request, exc: NotFoundError):
 @app.exception_handler(ForbiddenError)
 def forbidden_handler(_request: Request, exc: ForbiddenError):
     return JSONResponse(status_code=403, content={"detail": str(exc)})
+
+
+@app.exception_handler(ConflictError)
+def conflict_handler(_request: Request, exc: ConflictError):
+    return JSONResponse(status_code=409, content={"detail": str(exc)})
 
 
 app.include_router(meta.router)
