@@ -9,7 +9,7 @@ Repository: [LINK VOLGT]
 ## Architectuur in 10 regels
 
 1. `frontend/`: React + TypeScript + Vite. Alle aanroepen naar de API staan in `frontend/src/api.ts`.
-2. `backend/`: FastAPI + Pydantic v2 + SQLAlchemy 2 op Python 3.12.
+2. `backend/`: FastAPI + Pydantic v2 + SQLAlchemy 2 op Python 3.14.
 3. Contract eerst: elke aanvraag en elk antwoord is een Pydantic-schema (`backend/app/schemas.py`), gepubliceerd als OpenAPI op `/docs`.
 4. Lagen: `routes` (alleen HTTP) roepen `services` aan (regels en autorisatie), die `models` gebruiken (database).
 5. De huidige gebruiker komt uit één functie, `get_current_user` in `backend/app/auth.py`. Nu is dat een testlogin, in productie een Microsoft Entra ID-token.
@@ -23,7 +23,9 @@ Bewust nog niet ingebouwd: dubbele boekingen tegenhouden. Dat is de opdracht van
 
 ## Wat heb je nodig?
 
-Python 3.12, Node.js (LTS), Git en VS Code. Geen Docker en geen databaseserver.
+Python 3.14, Node.js (LTS), Git en VS Code. Geen Docker en geen databaseserver.
+
+Python haal je uit de Microsoft Store, via de app "Python Install Manager" (stappen in handout 01). We gebruiken bewust 3.14: Python 3.15.0 is uit, maar de vastgepinde pakketten zijn getest op 3.14.
 
 ## De backend starten
 
@@ -31,7 +33,7 @@ Open een terminal in VS Code (Terminal > New Terminal) in de map van dit project
 
 ```powershell
 cd backend
-python -m venv .venv
+py -3.14 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 uvicorn app.main:app --reload

@@ -1,7 +1,7 @@
 # Projectregels voor de AI-assistent
 
 Dit project is "Lokalen reserveren": een webapp waarmee personeel van een school lokalen reserveert.
-Stack: React + TypeScript + Vite (map `frontend/`), FastAPI + Pydantic v2 + SQLAlchemy 2 op Python 3.12 (map `backend/`), SQLite lokaal en Azure SQL in productie via één `DATABASE_URL`.
+Stack: React + TypeScript + Vite (map `frontend/`), FastAPI + Pydantic v2 + SQLAlchemy 2 op Python 3.14 (map `backend/`), SQLite lokaal en Azure SQL in productie via één `DATABASE_URL`.
 
 Antwoord in het Nederlands. Code, bestandsnamen en identifiers blijven Engels.
 
