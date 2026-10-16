@@ -1,10 +1,10 @@
-# Lokalen reserveren
+﻿# Lokalen reserveren
 
 Een kleine webapp waarmee personeel van een school lokalen reserveert. Ze dient als voorbeeld in de workshop "Van Vibe Coding naar Production-Ready AI Development" (OZCS, 16 oktober 2026): je ziet hoe een app met AI-hulp netjes wordt opgebouwd, en je breidt hem zelf uit.
 
 Alle gegevens in de app (scholen, personeel, lokalen) zijn verzonnen. Er is een testlogin: je kiest een testgebruiker, er is geen echt wachtwoord. Twee testgebruikers zitten op twee verschillende scholen, zodat je ziet dat een school de gegevens van een andere school niet kan zien.
 
-Repository: [LINK VOLGT]
+Repository: https://github.com/jasper-orion/ozcs-starter
 
 ## Architectuur in 10 regels
 
@@ -12,10 +12,10 @@ Repository: [LINK VOLGT]
 2. `backend/`: FastAPI + Pydantic v2 + SQLAlchemy 2 op Python 3.14.
 3. Contract eerst: elke aanvraag en elk antwoord is een Pydantic-schema (`backend/app/schemas.py`), gepubliceerd als OpenAPI op `/docs`.
 4. Lagen: `routes` (alleen HTTP) roepen `services` aan (regels en autorisatie), die `models` gebruiken (database).
-5. De huidige gebruiker komt uit één functie, `get_current_user` in `backend/app/auth.py`. Nu is dat een testlogin, in productie een Microsoft Entra ID-token.
+5. De huidige gebruiker komt uit Ã©Ã©n functie, `get_current_user` in `backend/app/auth.py`. Nu is dat een testlogin, in productie een Microsoft Entra ID-token.
 6. Elke query filtert op de school van de gebruiker. De server vertrouwt nooit een school-id uit de browser.
 7. Alleen de eigenaar kan een reservatie annuleren. Annuleren schrijft een rij in `audit_log` (wie, wat, wanneer), in dezelfde transactie.
-8. Instellingen staan in `.env` (niet in Git), met `backend/.env.example` als voorbeeld. De database is SQLite lokaal; één `DATABASE_URL` wijst in productie naar Azure SQL.
+8. Instellingen staan in `.env` (niet in Git), met `backend/.env.example` als voorbeeld. De database is SQLite lokaal; Ã©Ã©n `DATABASE_URL` wijst in productie naar Azure SQL.
 9. `/health` en `/version` laten zien of de API draait en welke build er live staat (`APP_VERSION`).
 10. Tests in `backend/tests/` bewijzen het gedrag. De regels voor de AI staan in `.github/copilot-instructions.md`.
 
